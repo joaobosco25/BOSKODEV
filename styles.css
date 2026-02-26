@@ -376,6 +376,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    grid-template-columns: auto 1fr;
 }
 
 .service-btn {
