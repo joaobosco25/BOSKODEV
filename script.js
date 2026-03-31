@@ -319,3 +319,96 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ========== PLAYGROUND MICROINTERAÇÕES ==========
+document.addEventListener('DOMContentLoaded', function () {
+    // Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    }
+
+    // Accordion
+    const accordionTriggers = document.querySelectorAll('.accordion-trigger');
+    accordionTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function () {
+            const item = this.parentElement;
+            const group = item.parentElement;
+
+            group.querySelectorAll('.accordion-item').forEach(acc => {
+                if (acc !== item) acc.classList.remove('active');
+            });
+
+            item.classList.toggle('active');
+        });
+    });
+
+    // Tabs
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const target = this.dataset.tab;
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanels.forEach(panel => panel.classList.remove('active'));
+
+            this.classList.add('active');
+            document.getElementById(target).classList.add('active');
+        });
+    });
+
+    // Choice buttons
+    const choiceButtons = document.querySelectorAll('.choice-btn');
+    choiceButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            choiceButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Tilt card
+    const tiltCard = document.getElementById('tiltCard');
+
+    if (tiltCard) {
+        tiltCard.addEventListener('mousemove', function (e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+
+            this.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+        });
+
+        tiltCard.addEventListener('mouseleave', function () {
+            this.style.transform = 'perspective(700px) rotateX(0) rotateY(0) scale(1)';
+        });
+    }
+});
+
+// ========== UX CHALLENGE ==========
+document.addEventListener('DOMContentLoaded', function () {
+    const revealBtn = document.getElementById('uxRevealBtn');
+    const resetBtn = document.getElementById('uxResetBtn');
+    const badUI = document.getElementById('badUI');
+    const goodUI = document.getElementById('goodUI');
+
+    if (revealBtn && resetBtn && badUI && goodUI) {
+        revealBtn.addEventListener('click', function () {
+            badUI.classList.remove('active');
+            goodUI.classList.add('active');
+        });
+
+        resetBtn.addEventListener('click', function () {
+            goodUI.classList.remove('active');
+            badUI.classList.add('active');
+        });
+    }
+});
