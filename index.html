@@ -415,9 +415,17 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
+            <img src="./assets/logo.jpeg" alt="Logo BoskoDev" class="logo-img">
                 <span class="logo-text">BoskoDev</span>
             </div>
-            <div class="nav-menu">
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+            <div class="nav-menu" id="nav-menu">
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#services" class="nav-link">Serviços</a>
                 <a href="#testimonials" class="nav-link">Clientes</a>
@@ -533,7 +541,7 @@
                 </div>
                 <div class="testimonial-card">
                     <p class="testimonial-text">aguardando</p>
-                    <p class="testimonial-author">MAURÍCIO MOISÉS - CEO, <a href="https://www.efaseg.com.br">EFASEG - CENTRO DE FORMAÇÃO DE VIGILANTES</a></p>
+                    <p class="testimonial-author">MAURÍCIO MOISÉS - COORDENADOR, <a href="https://www.efaseg.com.br">EFASEG - CENTRO DE FORMAÇÃO DE VIGILANTES</a></p>
                 </div>
                 <div class="testimonial-card">
                     <p class="testimonial-text">Excelente. Aceita ideia, minha liberdade criativa foi total. Conseguiu colocar no site, tudo que pedi e exatament da maneira que pedi. Captou minha excencia e dos meus eventos.</p>
@@ -558,7 +566,7 @@
     </section>
 
     <footer class="footer">
-        <p>&copy; 2024 BoskoDev - Web Development Sudio - Todos os direitos reservados.</p>
+        <p>&copy; 2026 BoskoDev - Web Development Sudio - Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js"></script>
@@ -604,6 +612,15 @@
       }
     });
   </script>
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+    });
+</script>
 </body>
 </html>
   

@@ -319,4 +319,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-console.log('Bakalov - Digital Marketing Studio loaded successfully!');
