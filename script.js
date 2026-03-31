@@ -1,14 +1,9 @@
-/* ============================================
-   BAKALOV - DIGITAL MARKETING STUDIO
-   JavaScript - Interactions & Animations
-   ============================================ */
 
-// ========== SMOOTH SCROLL & NAVIGATION ==========
+// ========== SCROLL E NAVEGAÇÃO ==========
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.page');
 
-    // Update active nav link on scroll
     window.addEventListener('scroll', () => {
         let current = '';
         
@@ -29,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scroll for nav links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -46,13 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========== BUTTON INTERACTIONS ==========
+// ========== INTERAÇÕES DO BOTÕES ==========
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.btn-primary');
     
     buttons.forEach(button => {
         button.addEventListener('click', function(e) {
-            // Ripple effect
             const ripple = document.createElement('span');
             const rect = this.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
@@ -71,19 +64,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========== SERVICE BUTTONS INTERACTION ==========
 document.addEventListener('DOMContentLoaded', function() {
     const serviceButtons = document.querySelectorAll('.service-btn');
     
     serviceButtons.forEach((button, index) => {
         button.addEventListener('click', function() {
-            // Remove active class from all buttons
             serviceButtons.forEach(btn => btn.classList.remove('active'));
             
-            // Add active class to clicked button
             this.classList.add('active');
             
-            // Add animation
             this.style.animation = 'none';
             setTimeout(() => {
                 this.style.animation = '';
@@ -92,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========== SCROLL ANIMATIONS ==========
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -118,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========== PARALLAX EFFECT ==========
+// ========== EFEITO PARALLAX ==========
 window.addEventListener('scroll', function() {
     const heroGradient = document.querySelector('.hero-gradient');
     
@@ -128,7 +116,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// ========== MOUSE FOLLOW EFFECT ==========
+// ========== EFEITO DO MOUSE ==========
 document.addEventListener('DOMContentLoaded', function() {
     const page1 = document.querySelector('.page-1');
     
@@ -159,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ========== BUTTON HOVER EFFECTS ==========
+// ========== EFEITO DO HOVER ==========
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.btn-primary, .service-btn');
     

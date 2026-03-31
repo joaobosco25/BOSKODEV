@@ -1,12 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoskoDev - Web Development Studio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css">
+  <title>BoskoDev - Web Development Studio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* TELA INICIAL */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #intro.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .scene {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    /* LÂMPADA */
+    .lamp {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #2b2b2b;
+      border: 4px solid #555;
+      box-shadow: 0 0 0 rgba(255, 230, 120, 0);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .lamp::before {
+      content: "";
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 35px;
+      background: #666;
+      border-radius: 4px;
+    }
+
+    .lamp.on {
+      background: #ffe66d;
+      border-color: #fff1a8;
+      box-shadow:
+        0 0 20px rgba(255, 230, 120, 0.8),
+        0 0 40px rgba(255, 230, 120, 0.6),
+        0 0 80px rgba(255, 230, 120, 0.4);
+    }
+
+    /* INTERRUPTOR */
+    .switch {
+      width: 70px;
+      height: 120px;
+      background: #f0f0f0;
+      border: 4px solid #bbb;
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 10px;
+      cursor: pointer;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.15);
+      transition: transform 0.15s ease;
+    }
+
+    .switch:hover {
+      transform: scale(1.03);
+    }
+
+    .toggle {
+      width: 30px;
+      height: 55px;
+      background: #d9d9d9;
+      border: 2px solid #999;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .switch.on {
+      align-items: flex-end;
+      padding-top: 0;
+      padding-bottom: 10px;
+    }
+
+    .switch.on .toggle {
+      background: #bdbdbd;
+    }
+
+    /* CONTEÚDO REAL */
+    #site-content {
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #site-content.visible {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- TELA DE ENTRADA -->
+  <div id="intro">
+    <div class="scene">
+      <div class="lamp" id="lamp"></div>
+      <div class="switch" id="switch">
+        <div class="toggle"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEU SITE REAL -->
+  <div id="site-content">
+    <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -15,7 +149,7 @@
             </div>
             <div class="nav-menu">
                 <a href="#home" class="nav-link active">Home</a>
-                <a href="#services" class="nav-link">Projetos</a>
+                <a href="#services" class="nav-link">Serviços</a>
                 <a href="#testimonials" class="nav-link">Clientes</a>
                 <a href="#contact" class="nav-link">Contato</a>
             </div>
@@ -47,16 +181,16 @@
             <h2 class="value-title">Você tem problemas ou quer criar sua landing page e website?<br>Estamos aqui pra te ajudar!</h2>
             <div class="value-cards">
                 <div class="value-card card-1">
-                    <h3>PORQUE TER UM WEBSITE PUBLICADO?</h3>
-                    <P>Para qualquer negócio, um website não é apenas algo elegante, mas uma maneira de divulgar seu negócio, além de poder ser monetizado! </p>
+                    <h3>PORQUE TER UM WEBSITE SE JÁ TENHO INSTAGRAN?</h3>
+                    <P>Porque rede social é vitrine emprestada. O site é endereço próprio. Nas redes, você depende de algoritmo. No site, você controla sua marca, sua oferta, seus contatos, seus argumentos de venda e sua captação. Em um mercado cada vez mais digitalizado, pequenos negócios que investem em presença digital estão mais preparados para competir e crescer.</P>
                 </div>
                 <div class="value-card card-2">
-                    <h3>CANSADO DE SITES FEITOS A BASE DO "COPIA E COLA"?</h3>
-                    <p>Todo estabelecimento é único. Nós criamos um site único que atende, especifico para seu objetivo.</p>
+                    <h3>TER UM SITE, REALMENTE AJUDA A VENDER MAIS?</h3>
+                    <p>Ajuda porque reduz atrito na decisão. O consumidor pesquisa, compara e quer clareza antes de comprar. Dados recentes do Google mostram que a jornada é híbrida e que a pesquisa virou etapa indispensável na decisão de compra. Quando o cliente encontra seu site com informações claras, ele avança mais rápido.</p>
                 </div>
                 <div class="value-card card-3">
-                    <h3>FEZ O SITE E SENTE QUE TE DEIXARAM NO ESCURO?</h3>
-                    <p>Nós mantemos você informado a cada passo do desenvolvimento. Dando uma consultoria 100% personalizada, da criação do código, até a publicação do site.</p>
+                    <h3>O QUE UM SITE FAZ, QUE A REDE SOCIAL NÃO FAZ BEM?</h3>
+                    <P>Organiza proposta de valor, ranqueia melhor em buscas, captura leads, permite páginas específicas por serviço, integra botão de WhatsApp, formulário, catálogo, mapa, depoimentos e métricas. Além disso, ele te dá base para anunciar e medir desempenho com mais precisão. O Google vem destacando a importância crescente de medição e otimização no marketing digital atual.</P>
                 </div>
             </div>
         </div>
@@ -69,12 +203,10 @@
                 <h2 class="services-title">O que oferecemos?</h2>
                 <div class="services-buttons">
                     <button class="service-btn active" data-service="0">CONSULTORIA TOTAL</button>
-                    <button class="service-btn" data-service="1">DESENVOLVEDOR PARTICULAR</button>
-                    <button class="service-btn" data-service="2">CORREÇÃO DE CÓDIGO FRONT-END</button>
-                    <button class="service-btn" data-service="2">CORREÇÃO DE CÓDIGO FRONT-END</button>
-                    <button class="service-btn" data-service="2">CORREÇÃO DE CÓDIGO FRONT-END</button>
-                    <button class="service-btn" data-service="2">CORREÇÃO DE CÓDIGO FRONT-END</button>
-
+                    <button class="service-btn" data-service="1">PROGRAMADOR PARTICULAR</button>
+                    <button class="service-btn" data-service="2">CORREÇÃO DE CÓDIGO</button>
+                    <button class="service-btn" data-service="2">DESENVOLVIMENTO MOBILE</button>
+                    <button class="service-btn" data-service="2">SUPORTE 24H</button>
                 </div>
             </div>
             <div class="services-right">
@@ -86,31 +218,39 @@
     <!-- Page 2 Bottom: Packages -->
     <section class="packages-section">
         <div class="packages-container">
-            <h2 class="packages-title">Our packages</h2>
-            <p class="packages-subtitle">Choose from our affordable and customizable digital marketing packages.</p>
+            <h2 class="packages-title">Nossos Pacotes</h2>
+            <p class="packages-subtitle">Escolha a melhor opção para o desenvolvimento digital do seu projeto.</p>
             <div class="packages-grid">
                 <div class="package-card">
-                    <h3>FOUNDATION</h3>
+                    <h3>PORTFÓLIO</h3>
                     <ul>
-                        <li>• Basic package</li>
-                        <li>• Monthly reporting</li>
-                        <li>• Email support</li>
+                        <li>• Um Website (estático) ou Landing Page</li>
+                        <li>• <strong>3</strong> consultorias e alterações após a finalização do código (08:00 às 18:00)</li>
+                        <li>• Sem Banco de Dados</li>
+                        <li>• Marca da desenvolvedora "<strong>BoskoDev</strong>" no rodapé</li>
+
                     </ul>
                 </div>
                 <div class="package-card">
-                    <h3>SOLUTION</h3>
+                    <h3>BÁSICO</h3>
                     <ul>
-                        <li>• Targeted package</li>
-                        <li>• Weekly reporting</li>
-                        <li>• Phone support</li>
+                        <li>• Um Website (estático) ou Landing Page</li>
+                        <li>• <strong>8</strong> consultorias e alterações após a finalização do código (08:00 às 18:00)</li>
+                        <li>• Sem Banco de Dados</li>
+                        <li>• Suporte com a publicação no site</li>
+                        <li>• Marca da desenvolvedora "<strong>BoskoDev</strong>" no rodapé</li>
                     </ul>
                 </div>
                 <div class="package-card">
                     <h3>BEST-ALL</h3>
                     <ul>
-                        <li>• Full package</li>
-                        <li>• Daily updates</li>
-                        <li>• 24/7 support</li>
+                        <li>• Um Website (estático ou dinâmico) ou Landing Page</li>
+                        <li>• <strong>20</strong> consultorias e alterações após a finalização do código (24H)</li>
+                        <li>• Com Banco de Dados</li>
+                        <li>• Suporte com a publicação no site</li>
+                        <li>• Marca da desenvolvedora "<strong>BoskoDev</strong>" no rodapé <strong>OPCIONAL</strong></li>
+                        <li>• Suporte personalizado a qualquer hora do dia, com resposta humana em até 5 min</li>
+                        <li>• Auxílio com outros códigos, sendo websites, database, aplicação ou landing page.</li>
                     </ul>
                 </div>
             </div>
@@ -123,16 +263,16 @@
             <h2 class="testimonials-title">Últimos Clientes</h2>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">Their commitment, attention to detail and expertise brought our vision to life perfectly. We couldn't have asked for a better partner on this journey.</p>
-                    <p class="testimonial-author">CARLOS MENDONÇA - CEO, TECH VENTURES</p>
+                    <p class="testimonial-text">"João, parabéns pelo seu trabalho! Fiquei muito satisfeito com o resultado da landing page e com seu atendimento."</p>
+                    <p class="testimonial-author">PEDRO SILVA - CEO, <a href="https://auge7.com.br">AUGE7</a></p>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">The team at Bakalov helped us increase our digital presence significantly. Their strategies are data-driven and results-oriented.</p>
-                    <p class="testimonial-author">EMILY FOSTER - FOUNDER, DESIGN STUDIO</p>
+                    <p class="testimonial-text">aguardando</p>
+                    <p class="testimonial-author">MAURÍCIO MOISÉS - CEO, <a href="https://www.efaseg.com.br">EFASEG - CENTRO DE FORMAÇÃO DE VIGILANTES</a></p>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">I'm amazed with other agencies before. Bakalov's creative team is truly exceptional and delivers outstanding results consistently.</p>
-                    <p class="testimonial-author">DANIEL SILVA - DIRECTOR, MARKETING</p>
+                    <p class="testimonial-text">Excelente. Aceita ideia, minha liberdade criativa foi total. Conseguiu colocar no site, tudo que pedi e exatament da maneira que pedi. Captou minha excencia e dos meus eventos.</p>
+                    <p class="testimonial-author"> DJ ALEX - ARTISTA, DJ E FUNDADOR <a href="https://djalexs.com.br/">SATISPHASOM</a></p>
                 </div>
             </div>
         </div>
@@ -159,5 +299,27 @@
     </footer>
 
     <script src="script.js"></script>
+</body>
+</html>
+
+  </div>
+
+  <script>
+    const lamp = document.getElementById('lamp');
+    const sw = document.getElementById('switch');
+    const intro = document.getElementById('intro');
+    const content = document.getElementById('site-content');
+
+    sw.addEventListener('click', () => {
+      lamp.classList.add('on');
+      sw.classList.add('on');
+
+      setTimeout(() => {
+        intro.classList.add('hidden');
+        content.classList.add('visible');
+        document.body.style.overflow = 'auto';
+      }, 900);
+    });
+  </script>
 </body>
 </html>

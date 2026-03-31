@@ -828,3 +828,6 @@ body {
         font-size: 0.9rem;
     }
 }
+.testimonial-card a {
+    color: var(--light-blue);
+}
