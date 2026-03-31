@@ -3,30 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css">
   <title>BoskoDev - Web Development Studio</title>
+  <link rel="stylesheet" href="styles.css">
+
   <style>
+    :root{
+      --bg-dark: #050505;
+      --panel: rgba(255,255,255,0.06);
+      --panel-border: rgba(255,255,255,0.12);
+      --warm: #ffd76a;
+      --warm-2: #ffefb0;
+      --metal-1: #f3f3f3;
+      --metal-2: #d7d7d7;
+      --metal-3: #9d9d9d;
+      --shadow: rgba(0,0,0,0.45);
+      --site-reveal-duration: 900ms;
+    }
+
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      font-family: Arial, sans-serif;
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body.intro-lock {
       overflow: hidden;
     }
 
-    /* TELA INICIAL */
+    /* CAMADA DE ABERTURA */
     #intro {
       position: fixed;
       inset: 0;
-      background: #0d0d0d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
+      z-index: 99999;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 15%, rgba(0,0,0,0) 35%),
+        radial-gradient(circle at center, rgba(30,30,30,0.65) 0%, rgba(10,10,10,0.94) 50%, #000 100%);
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 900ms ease, visibility 900ms ease;
     }
 
     #intro.hidden {
@@ -35,113 +56,362 @@
       pointer-events: none;
     }
 
-    .scene {
+    /* Clarão cinematográfico */
+    #intro-flash {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(255,244,196,0.92) 0%, rgba(255,234,153,0.45) 16%, rgba(255,220,120,0.14) 30%, rgba(255,220,120,0.03) 45%, rgba(255,220,120,0) 62%);
+      transition: opacity 420ms ease;
+      mix-blend-mode: screen;
+    }
+
+    #intro.flash #intro-flash {
+      opacity: 1;
+    }
+
+    /* Conteúdo central */
+    .intro-stage {
+      position: relative;
+      z-index: 2;
+      width: min(92vw, 560px);
+      min-height: 520px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 40px;
+      justify-content: center;
+      gap: 34px;
     }
 
-    /* LÂMPADA */
-    .lamp {
-      width: 90px;
+    .intro-wire {
+      width: 2px;
+      height: 92px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0.35), rgba(255,255,255,0.08));
+      box-shadow: 0 0 10px rgba(255,255,255,0.08);
+      border-radius: 999px;
+      opacity: 0.9;
+    }
+
+    /* Lâmpada */
+    .lamp-assembly {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      display: grid;
+      place-items: center;
+    }
+
+    .lamp-aura {
+      position: absolute;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,234,160,0.98) 0%, rgba(255,224,123,0.5) 32%, rgba(255,224,123,0.16) 58%, rgba(255,224,123,0) 78%);
+      filter: blur(8px);
+      transform: scale(0.55);
+      opacity: 0;
+      transition: transform 420ms ease, opacity 420ms ease;
+    }
+
+    .lamp-bloom {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(255,235,170,0.30) 0%,
+        rgba(255,228,130,0.14) 24%,
+        rgba(255,220,120,0.06) 42%,
+        rgba(255,220,120,0.02) 56%,
+        rgba(255,220,120,0) 72%);
+      filter: blur(16px);
+      transform: scale(0.8);
+      opacity: 0;
+      transition: transform 520ms ease, opacity 520ms ease;
+    }
+
+    .lamp-svg {
+      position: relative;
+      z-index: 2;
+      width: 120px;
+      height: 120px;
+      transition: transform 320ms ease, filter 420ms ease;
+      filter: drop-shadow(0 4px 18px rgba(0,0,0,0.45));
+    }
+
+    .lamp-svg .bulb-glass {
+      fill: #3c3c3f;
+      transition: fill 360ms ease;
+    }
+
+    .lamp-svg .bulb-core {
+      fill: #55585c;
+      transition: fill 360ms ease;
+    }
+
+    .lamp-svg .bulb-base {
+      fill: #a8a8ab;
+    }
+
+    .lamp-svg .bulb-base-dark {
+      fill: #7d7d80;
+    }
+
+    .lamp-svg .filament {
+      stroke: #777;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 360ms ease;
+    }
+
+    .lamp-assembly.on .lamp-aura {
+      opacity: 1;
+      transform: scale(1.35);
+    }
+
+    .lamp-assembly.on .lamp-bloom {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .lamp-assembly.on .lamp-svg {
+      transform: translateY(-1px) scale(1.03);
+      filter:
+        drop-shadow(0 0 10px rgba(255,228,130,0.35))
+        drop-shadow(0 0 24px rgba(255,228,130,0.28))
+        drop-shadow(0 8px 24px rgba(0,0,0,0.32));
+    }
+
+    .lamp-assembly.on .lamp-svg .bulb-glass {
+      fill: #ffd86d;
+    }
+
+    .lamp-assembly.on .lamp-svg .bulb-core {
+      fill: #fff0b3;
+    }
+
+    .lamp-assembly.on .lamp-svg .filament {
+      stroke: #d48d00;
+    }
+
+    /* Poça de luz no chão */
+    .light-floor {
+      position: absolute;
+      bottom: 72px;
+      width: 300px;
       height: 90px;
       border-radius: 50%;
-      background: #2b2b2b;
-      border: 4px solid #555;
-      box-shadow: 0 0 0 rgba(255, 230, 120, 0);
-      transition: all 0.4s ease;
+      background: radial-gradient(circle, rgba(255,232,135,0.18) 0%, rgba(255,232,135,0.08) 38%, rgba(255,232,135,0.02) 58%, rgba(255,232,135,0) 75%);
+      filter: blur(16px);
+      opacity: 0;
+      transform: scale(0.78);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .lamp-assembly.on ~ .light-floor {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Interruptor */
+    .switch-wrap {
       position: relative;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
     }
 
-    .lamp::before {
-      content: "";
-      position: absolute;
-      top: -35px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 8px;
-      height: 35px;
-      background: #666;
-      border-radius: 4px;
-    }
-
-    .lamp.on {
-      background: #ffe66d;
-      border-color: #fff1a8;
+    .switch-panel {
+      width: 96px;
+      height: 156px;
+      border-radius: 22px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04)),
+        linear-gradient(145deg, #f1f1f1, #cfcfcf 58%, #b9b9b9);
+      border: 1px solid rgba(255,255,255,0.28);
       box-shadow:
-        0 0 20px rgba(255, 230, 120, 0.8),
-        0 0 40px rgba(255, 230, 120, 0.6),
-        0 0 80px rgba(255, 230, 120, 0.4);
-    }
-
-    /* INTERRUPTOR */
-    .switch {
-      width: 70px;
-      height: 120px;
-      background: #f0f0f0;
-      border: 4px solid #bbb;
-      border-radius: 12px;
+        inset 0 2px 8px rgba(255,255,255,0.44),
+        inset 0 -8px 18px rgba(0,0,0,0.12),
+        0 14px 28px rgba(0,0,0,0.35);
+      position: relative;
       display: flex;
       align-items: flex-start;
       justify-content: center;
       padding-top: 10px;
       cursor: pointer;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.15);
-      transition: transform 0.15s ease;
+      user-select: none;
+      transition: transform 160ms ease, box-shadow 220ms ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .switch:hover {
-      transform: scale(1.03);
+    .switch-panel:hover {
+      transform: translateY(-1px) scale(1.015);
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,0.44),
+        inset 0 -8px 18px rgba(0,0,0,0.12),
+        0 18px 34px rgba(0,0,0,0.42);
     }
 
-    .toggle {
-      width: 30px;
-      height: 55px;
-      background: #d9d9d9;
-      border: 2px solid #999;
-      border-radius: 8px;
-      transition: all 0.25s ease;
+    .switch-panel:active {
+      transform: scale(0.99);
     }
 
-    .switch.on {
+    .switch-screws::before,
+    .switch-screws::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #8a8a8a, #d9d9d9);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.45), inset 0 -1px 1px rgba(0,0,0,0.18);
+    }
+
+    .switch-screws::before { top: 11px; }
+    .switch-screws::after  { bottom: 11px; }
+
+    .switch-toggle {
+      width: 40px;
+      height: 74px;
+      border-radius: 14px;
+      background:
+        linear-gradient(180deg, #f0f0f0, #c8c8c8 55%, #b3b3b3);
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow:
+        inset 0 2px 5px rgba(255,255,255,0.55),
+        inset 0 -4px 8px rgba(0,0,0,0.14),
+        0 4px 8px rgba(0,0,0,0.10);
+      transition: transform 240ms cubic-bezier(.2,.7,.2,1), background 220ms ease;
+      position: relative;
+    }
+
+    .switch-toggle::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 14px;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.38);
+    }
+
+    .switch-panel.on {
       align-items: flex-end;
       padding-top: 0;
       padding-bottom: 10px;
     }
 
-    .switch.on .toggle {
-      background: #bdbdbd;
+    .switch-panel.on .switch-toggle {
+      transform: translateY(1px);
+      background:
+        linear-gradient(180deg, #cfcfcf, #b5b5b5 55%, #a0a0a0);
     }
 
-    /* CONTEÚDO REAL */
-    #site-content {
-      min-height: 100vh;
+    .switch-caption {
+      font: 500 13px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.48);
+    }
+
+    /* Efeito de revelar o site */
+    .site-shell {
       opacity: 0;
-      transition: opacity 1s ease;
+      transform: scale(1.012);
+      filter: blur(8px);
+      transition:
+        opacity var(--site-reveal-duration) ease,
+        transform var(--site-reveal-duration) ease,
+        filter var(--site-reveal-duration) ease;
     }
 
-    #site-content.visible {
+    .site-shell.visible {
       opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+    }
+
+    /* Vinheta suave */
+    .intro-vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, rgba(0,0,0,0) 34%, rgba(0,0,0,0.12) 60%, rgba(0,0,0,0.34) 100%);
+    }
+
+    /* Responsivo */
+    @media (max-width: 640px) {
+      .intro-stage {
+        min-height: 100svh;
+        gap: 28px;
+      }
+
+      .lamp-assembly {
+        width: 180px;
+        height: 180px;
+      }
+
+      .lamp-svg {
+        width: 102px;
+        height: 102px;
+      }
+
+      .switch-panel {
+        width: 88px;
+        height: 144px;
+      }
     }
   </style>
 </head>
-<body>
+<body class="intro-lock">
 
-  <!-- TELA DE ENTRADA -->
-  <div id="intro">
-    <div class="scene">
-      <div class="lamp" id="lamp"></div>
-      <div class="switch" id="switch">
-        <div class="toggle"></div>
+  <!-- CAMADA PREMIUM -->
+  <div id="intro" aria-hidden="false">
+    <div id="intro-flash"></div>
+    <div class="intro-vignette"></div>
+
+    <div class="intro-stage">
+      <div class="intro-wire"></div>
+
+      <div class="lamp-assembly" id="lampAssembly">
+        <div class="lamp-aura"></div>
+        <div class="lamp-bloom"></div>
+
+        <svg class="lamp-svg" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path class="bulb-glass" d="M64 18c-20.6 0-37.5 16.5-37.5 37 0 13.1 5.8 21.9 12.8 29.2 5.8 6.1 9.4 10.6 10.8 18.3h27.8c1.4-7.7 5-12.2 10.8-18.3 7-7.3 12.8-16.1 12.8-29.2 0-20.5-16.9-37-37.5-37z"/>
+          <ellipse class="bulb-core" cx="64" cy="55" rx="18" ry="20"/>
+          <rect class="bulb-base" x="50" y="103" width="28" height="10" rx="3"/>
+          <rect class="bulb-base-dark" x="52" y="113" width="24" height="8" rx="2.5"/>
+
+          <path class="filament" d="M53 59c3.5-7 7.2-10.5 11-10.5S71.5 52 75 59"/>
+          <path class="filament" d="M57 66h14"/>
+          <path class="filament" d="M60 72h8"/>
+        </svg>
+
+        <div class="light-floor"></div>
+      </div>
+
+      <div class="switch-wrap">
+        <div class="switch-panel switch-screws" id="powerSwitch" role="button" aria-label="Ligar experiência" tabindex="0">
+          <div class="switch-toggle"></div>
+        </div>
+        <div class="switch-caption">ligar</div>
       </div>
     </div>
   </div>
 
-  <!-- SEU SITE REAL -->
-  <div id="site-content">
+ <div id="site-content">
     <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -156,7 +426,6 @@
         </div>
     </nav>
 
-    <!-- Page 1: Hero Section -->
     <section id="home" class="page page-1">
         <div class="page-content">
             <div class="hero-left">
@@ -175,7 +444,6 @@
 
     </section>
 
-    <!-- Page 1 Bottom: Value Proposition -->
     <section class="value-section">
         <div class="value-container">
             <h2 class="value-title">Você tem problemas ou quer criar sua landing page e website?<br>Estamos aqui pra te ajudar!</h2>
@@ -196,7 +464,6 @@
         </div>
     </section>
 
-    <!-- Page 2: Services -->
     <section id="services" class="page page-2">
         <div class="page-content">
             <div class="services-left">
@@ -215,7 +482,6 @@
         </div>
     </section>
 
-    <!-- Page 2 Bottom: Packages -->
     <section class="packages-section">
         <div class="packages-container">
             <h2 class="packages-title">Nossos Pacotes</h2>
@@ -257,7 +523,6 @@
         </div>
     </section>
 
-    <!-- Page 3: Testimonials -->
     <section id="testimonials" class="page page-3">
         <div class="testimonials-container">
             <h2 class="testimonials-title">Últimos Clientes</h2>
@@ -284,7 +549,6 @@
         </div>
     </section>
 
-    <!-- Page 4: Contact -->
     <section id="contact" class="page page-4">
         <div class="contact-container">
             <div class="contact-shape"></div>
@@ -293,7 +557,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2024 BoskoDev - Web Development Sudio - Todos os direitos reservados.</p>
     </footer>
@@ -303,23 +566,44 @@
 </html>
 
   </div>
+  <script src="script.js"></script>
 
   <script>
-    const lamp = document.getElementById('lamp');
-    const sw = document.getElementById('switch');
+    const body = document.body;
     const intro = document.getElementById('intro');
-    const content = document.getElementById('site-content');
+    const lampAssembly = document.getElementById('lampAssembly');
+    const powerSwitch = document.getElementById('powerSwitch');
+    const siteShell = document.getElementById('siteShell');
 
-    sw.addEventListener('click', () => {
-      lamp.classList.add('on');
-      sw.classList.add('on');
+    let activated = false;
+
+    function revealSite() {
+      if (activated) return;
+      activated = true;
+
+      lampAssembly.classList.add('on');
+      powerSwitch.classList.add('on');
+      intro.classList.add('flash');
+
+      setTimeout(() => {
+        siteShell.classList.add('visible');
+      }, 180);
 
       setTimeout(() => {
         intro.classList.add('hidden');
-        content.classList.add('visible');
-        document.body.style.overflow = 'auto';
+        body.classList.remove('intro-lock');
       }, 900);
+    }
+
+    powerSwitch.addEventListener('click', revealSite);
+
+    powerSwitch.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        revealSite();
+      }
     });
   </script>
 </body>
 </html>
+  

@@ -162,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========== CARD HOVER EFFECTS ==========
 document.addEventListener('DOMContentLoaded', function() {
     const cards = document.querySelectorAll('.value-card, .package-card, .testimonial-card');
     
@@ -177,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========== COUNTER ANIMATION ==========
 function animateCounter(element, target, duration = 2000) {
     let current = 0;
     const increment = target / (duration / 16);
@@ -192,7 +190,6 @@ function animateCounter(element, target, duration = 2000) {
     }, 16);
 }
 
-// ========== PAGE TRANSITION EFFECTS ==========
 document.addEventListener('DOMContentLoaded', function() {
     const pages = document.querySelectorAll('.page');
     
@@ -202,13 +199,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========== FORM VALIDATION (if needed) ==========
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-// ========== SCROLL TO TOP BUTTON ==========
 const scrollTopButton = document.createElement('button');
 scrollTopButton.innerHTML = '↑';
 scrollTopButton.className = 'scroll-to-top';
@@ -257,7 +252,6 @@ scrollTopButton.addEventListener('mouseleave', function() {
     this.style.transform = 'scale(1)';
 });
 
-// ========== RIPPLE EFFECT STYLES ==========
 const style = document.createElement('style');
 style.textContent = `
     .btn {
@@ -283,7 +277,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ========== LAZY LOADING IMAGES ==========
 if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -301,8 +294,6 @@ if ('IntersectionObserver' in window) {
     });
 }
 
-// ========== PERFORMANCE OPTIMIZATION ==========
-// Debounce function for scroll events
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -315,9 +306,7 @@ function debounce(func, wait) {
     };
 }
 
-// ========== ACCESSIBILITY IMPROVEMENTS ==========
 document.addEventListener('DOMContentLoaded', function() {
-    // Add keyboard navigation support
     const buttons = document.querySelectorAll('button, a');
     
     buttons.forEach(button => {
@@ -330,5 +319,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========== INITIALIZATION ==========
 console.log('Bakalov - Digital Marketing Studio loaded successfully!');

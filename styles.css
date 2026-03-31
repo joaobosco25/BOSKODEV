@@ -1,9 +1,3 @@
-/* ============================================
-   BAKALOV - DIGITAL MARKETING STUDIO
-   CSS3 Stylesheet with Animations
-   ============================================ */
-
-/* ========== ROOT VARIABLES ========== */
 :root {
     --primary-blue: #0099ff;
     --dark-blue: #001a4d;
@@ -16,7 +10,6 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ========== GLOBAL STYLES ========== */
 * {
     margin: 0;
     padding: 0;
@@ -34,7 +27,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ========== NAVIGATION ========== */
 .navbar {
     position: fixed;
     top: 0;
@@ -114,7 +106,7 @@ body {
     color: var(--primary-blue);
 }
 
-/* ========== BUTTONS ========== */
+/* ========== Botões ========== */
 .btn {
     padding: 0.75rem 2rem;
     border: none;
@@ -142,7 +134,7 @@ body {
     transform: translateY(0);
 }
 
-/* ========== PAGE STRUCTURE ========== */
+/* ========== Estrutura da Pag ========== */
 .page {
     min-height: 100vh;
     display: flex;
@@ -162,7 +154,7 @@ body {
     align-items: center;
 }
 
-/* ========== PAGE 1: HERO SECTION ========== */
+/* ========== HERO SECTION ========== */
 .page-1 {
     background: linear-gradient(135deg, #3a3eff 0%, #0c113b 100%);
     position: relative;
@@ -362,7 +354,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* ========== PAGE 2: SERVICES ========== */
+/* ========== PAGE 2: SERVIÇOS ========== */
 .page-2 {
     background: linear-gradient(180deg, var(--dark-blue) 0%, #003366 100%);
     color: var(--white);
@@ -427,7 +419,7 @@ body {
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
 }
 
-/* ========== PACKAGES SECTION ========== */
+/* ========== PACOTES SECTION ========== */
 .packages-section {
     background: linear-gradient(180deg, #003366 0%, var(--dark-blue) 100%);
     color: var(--white);
@@ -518,7 +510,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* ========== PAGE 3: TESTIMONIALS ========== */
+/* ========== PAGE 3: TESTEMUNHAS ========== */
 .page-3 {
     background: linear-gradient(180deg, var(--dark-blue) 0%, #001a4d 100%);
     color: var(--white);
@@ -603,7 +595,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ========== CTA SECTION ========== */
+/* ========== CONTATO SECTION ========== */
 .cta-section {
     position: relative;
     width: 100%;
@@ -658,7 +650,7 @@ body {
     z-index: 1;
 }
 
-/* ========== PAGE 4: CONTACT ========== */
+/* ========== CONTATOS ========== */
 .page-4 {
     background: linear-gradient(135deg, #001a4d 0%, var(--dark-blue) 100%);
     color: var(--white);
@@ -736,7 +728,7 @@ body {
     border-top: 1px solid rgba(0, 212, 255, 0.1);
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
+/* ========== DESIGN RESPONSIVO ========== */
 @media (max-width: 768px) {
     .page-content {
         grid-template-columns: 1fr;
